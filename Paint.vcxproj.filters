@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="DrawingTools">
+      <UniqueIdentifier>{1bf4b398-968c-4824-94ff-2da3b04c03e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -30,6 +33,21 @@
     <ClInclude Include="Paint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Layers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pensil.h">
+      <Filter>DrawingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool.h">
+      <Filter>DrawingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingTools.h">
+      <Filter>DrawingTools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -37,6 +55,18 @@
     </ClCompile>
     <ClCompile Include="Paint.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Layers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Pensil.cpp">
+      <Filter>DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool.cpp">
+      <Filter>DrawingTools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

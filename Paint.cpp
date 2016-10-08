@@ -7,9 +7,9 @@
 #define MAX_LOADSTRING 100
 
 // Global Variables:
-HINSTANCE hInst;                                // current instance
-WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
-WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+HINSTANCE		hInst;								// current instance
+WCHAR			szTitle[MAX_LOADSTRING];            // The title bar text
+WCHAR			szWindowClass[MAX_LOADSTRING];      // the main window class name
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -125,11 +125,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-	case WM_CREATE: {
+		case WM_CREATE: {
+			Layers::Init(hWnd);
+			ToolManager::Init();
+		} break;
 
-	} break;
-    case WM_COMMAND:
-        {
+		case WM_LBUTTONDOWN: {
+			ToolManager::instance->tool->MouseLButtonDown(LOWORD(lParam), HIWORD(lParam));
+		} break;
+
+		case WM_MOUSEMOVE: {
+			ToolManager::instance->tool->MouseMove(LOWORD(lParam), HIWORD(lParam));
+		} break;
+
+		case WM_LBUTTONUP: {
+			ToolManager::instance->tool->MouseLButtonUp(LOWORD(lParam), HIWORD(lParam));
+		} 
+
+		case WM_COMMAND: {
             int wmId = LOWORD(wParam);
             // Parse the menu selections:
             switch (wmId)
@@ -143,20 +156,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
             }
-        }
-        break;
-    case WM_PAINT:
-        {
+        } break;
+
+		case WM_PAINT: {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Add any drawing code that uses hdc here...
+            
+			RECT r;
+			GetClientRect(hWnd, &r);
+
+			BitBlt(hdc, 0, 0, r.right, r.bottom, Layers::instance->main, 0, 0, SRCCOPY);
+
             EndPaint(hWnd, &ps);
-        }
+        } break;
+
+		case WM_DESTROY:
+			PostQuitMessage(0);
         break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-    default:
+
+		default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
