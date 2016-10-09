@@ -181,6 +181,14 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
 		break;
 
+	case ID_TOOLS_NONE:
+		ToolManager::instance->SetTool(TID_TOOL);
+		break;
+
+	case ID_TOOLS_PENSIL:
+		ToolManager::instance->SetTool(TID_PENSIL);
+		break;
+
 	case IDM_EXIT:
 		DestroyWindow(hWnd);
 		break;
