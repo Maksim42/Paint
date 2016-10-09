@@ -7,8 +7,6 @@ ToolManager::ToolManager() {
 	tools[TID_TOOL] = new Tool();
 	tools[TID_PENSIL] = new Pensil();
 
-	//tool = new Pensil();
-
 	SetTool(TID_TOOL);
 }
 

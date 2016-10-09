@@ -16,6 +16,9 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+void				CreateMessageHandler(HWND);
+void				PaintMessageHandler(HWND);
+bool				CommandMessageHandler(HWND, WPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -123,61 +126,82 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)
-    {
-		case WM_CREATE: {
-			Layers::Init(hWnd);
-			ToolManager::Init();
-		} break;
+	switch (message)
+	{
+	case WM_CREATE:
+		CreateMessageHandler(hWnd);
+		break;
 
-		case WM_LBUTTONDOWN: {
-			ToolManager::instance->tool->MouseLButtonDown(LOWORD(lParam), HIWORD(lParam));
-		} break;
+	case WM_LBUTTONDOWN:
+		ToolManager::instance->tool->MouseLButtonDown(LOWORD(lParam), HIWORD(lParam));
+		break;
 
-		case WM_MOUSEMOVE: {
-			ToolManager::instance->tool->MouseMove(LOWORD(lParam), HIWORD(lParam));
-		} break;
+	case WM_MOUSEMOVE:
+		ToolManager::instance->tool->MouseMove(LOWORD(lParam), HIWORD(lParam));
+		break;
 
-		case WM_LBUTTONUP: {
-			ToolManager::instance->tool->MouseLButtonUp(LOWORD(lParam), HIWORD(lParam));
-		} 
+	case WM_LBUTTONUP:
+		ToolManager::instance->tool->MouseLButtonUp(LOWORD(lParam), HIWORD(lParam));
+		break;
 
-		case WM_COMMAND: {
-            int wmId = LOWORD(wParam);
-            // Parse the menu selections:
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
-        } break;
+	case WM_COMMAND: {
+		bool result = CommandMessageHandler(hWnd, wParam);
 
-		case WM_PAINT: {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            
-			RECT r;
-			GetClientRect(hWnd, &r);
+		if (!result) {
+			return DefWindowProc(hWnd, message, wParam, lParam);
+		}
+	} break;
 
-			BitBlt(hdc, 0, 0, r.right, r.bottom, Layers::instance->main, 0, 0, SRCCOPY);
+	case WM_PAINT:
+		PaintMessageHandler(hWnd);
+		break;
 
-            EndPaint(hWnd, &ps);
-        } break;
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		break;
 
-		case WM_DESTROY:
-			PostQuitMessage(0);
-        break;
-
-		default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
+	default:
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
     return 0;
+}
+
+void CreateMessageHandler(HWND hWnd) {
+	Layers::Init(hWnd);
+	ToolManager::Init();
+}
+
+bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
+	bool result = true;
+	int wmId = LOWORD(wParam);
+
+	switch (wmId)
+	{
+	case IDM_ABOUT:
+		DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+		break;
+
+	case IDM_EXIT:
+		DestroyWindow(hWnd);
+		break;
+
+	default:
+		result = false;
+	}
+
+	return result;
+}
+
+void PaintMessageHandler(HWND hWnd) {
+	PAINTSTRUCT ps;
+	HDC hdc = BeginPaint(hWnd, &ps);
+
+	RECT r;
+	GetClientRect(hWnd, &r);
+
+	BitBlt(hdc, 0, 0, r.right, r.bottom, Layers::instance->main, 0, 0, SRCCOPY);
+
+	EndPaint(hWnd, &ps);
 }
 
 // Message handler for about box.
