@@ -5,9 +5,10 @@
 class Tool {
 public:
 	Tool();
-	virtual void MouseLButtonDown(int, int);
-	virtual void MouseMove(int, int);
-	virtual void MouseLButtonUp(int, int);
+	virtual void MouseLButtonDown(int, int) = 0;
+	virtual void MouseMove(int, int) = 0;
+	virtual void MouseLButtonUp(int, int) = 0;
+	virtual void StopPainting();
 protected:
 	bool isPaint;
 	int	_x;

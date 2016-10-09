@@ -4,10 +4,10 @@
 ToolManager *ToolManager::instance = NULL;
 
 ToolManager::ToolManager() {
-	tools[TID_TOOL] = new Tool();
 	tools[TID_PENSIL] = new Pensil();
+	tools[TID_LINE] = new Line();
 
-	SetTool(TID_TOOL);
+	SetTool(TID_PENSIL);
 }
 
 void ToolManager::Init() {

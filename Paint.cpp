@@ -181,12 +181,12 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
 		break;
 
-	case ID_TOOLS_NONE:
-		ToolManager::instance->SetTool(TID_TOOL);
-		break;
-
 	case ID_TOOLS_PENSIL:
 		ToolManager::instance->SetTool(TID_PENSIL);
+		break;
+
+	case ID_TOOLS_LINE:
+		ToolManager::instance->SetTool(TID_LINE);
 		break;
 
 	case IDM_EXIT:
@@ -207,7 +207,7 @@ void PaintMessageHandler(HWND hWnd) {
 	RECT r;
 	GetClientRect(hWnd, &r);
 
-	BitBlt(hdc, 0, 0, r.right, r.bottom, Layers::instance->main, 0, 0, SRCCOPY);
+	BitBlt(hdc, 0, 0, r.right, r.bottom, Layers::instance->temporari, 0, 0, SRCCOPY);
 
 	EndPaint(hWnd, &ps);
 }

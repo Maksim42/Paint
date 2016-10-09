@@ -5,11 +5,11 @@ Tool::Tool() {
 	isPaint = false;
 }
 
-void Tool::MouseLButtonDown(int, int) {
-}
+void Tool::StopPainting() {
+	isPaint = false;
 
-void Tool::MouseMove(int, int) {
-}
+	BitBlt(Layers::instance->temporari, 0, 0, Layers::instance->clientArea.right,
+		Layers::instance->clientArea.bottom, Layers::instance->main, 0, 0, SRCCOPY);
 
-void Tool::MouseLButtonUp(int, int) {
+	InvalidateRect(Layers::instance->hWin, &(Layers::instance->clientArea), false);
 }
