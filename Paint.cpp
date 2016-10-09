@@ -144,6 +144,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		ToolManager::instance->tool->MouseLButtonUp(LOWORD(lParam), HIWORD(lParam));
 		break;
 
+	case WM_MOUSELEAVE:
+		ToolManager::instance->tool->StopPainting();
+		break;
+
 	case WM_COMMAND: {
 		bool result = CommandMessageHandler(hWnd, wParam);
 

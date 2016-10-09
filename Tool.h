@@ -13,5 +13,6 @@ protected:
 	bool isPaint;
 	int	_x;
 	int	_y;
+	TRACKMOUSEEVENT trackMouseEvent;
 };
 

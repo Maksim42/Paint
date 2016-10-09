@@ -3,6 +3,9 @@
 
 Tool::Tool() {
 	isPaint = false;
+	trackMouseEvent.cbSize = sizeof(trackMouseEvent);
+	trackMouseEvent.dwFlags = TME_LEAVE; //отслеживаем выход курсора
+	trackMouseEvent.hwndTrack = Layers::instance->hWin; //из этого окна
 }
 
 void Tool::StopPainting() {

@@ -20,6 +20,7 @@ void Pensil::MouseMove(int x, int y) {
 
 
 		InvalidateRect(Layers::instance->hWin, &(Layers::instance->clientArea), false);
+		TrackMouseEvent(&trackMouseEvent);
 	}
 }
 

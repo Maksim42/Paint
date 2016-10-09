@@ -23,13 +23,16 @@ void Line::MouseMove(int x, int y) {
 		LineTo(Layers::instance->temporari, x, y);
 
 		InvalidateRect(Layers::instance->hWin, &(Layers::instance->clientArea), false);
+		TrackMouseEvent(&trackMouseEvent);
 	}
 }
 
 void Line::MouseLButtonUp(int x, int y) {
-	isPaint = false;
+	if (isPaint) {
+		isPaint = false;
 
-	LineTo(Layers::instance->main, x, y);
+		LineTo(Layers::instance->main, x, y);
 
-	InvalidateRect(Layers::instance->hWin, &(Layers::instance->clientArea), false);
+		InvalidateRect(Layers::instance->hWin, &(Layers::instance->clientArea), false);
+	}
 }
