@@ -173,6 +173,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void CreateMessageHandler(HWND hWnd) {
 	Layers::Init(hWnd);
 	ToolManager::Init();
+	ColorChanger::Init(hWnd);
 }
 
 bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
@@ -191,6 +192,14 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 
 	case ID_TOOLS_LINE:
 		ToolManager::instance->SetTool(TID_LINE);
+		break;
+
+	case ID_TOOLS_PENCOLOR:
+		ColorChanger::instance->ChangePen();
+		break;
+
+	case ID_TOOLS_BRUSHCOLOR:
+		ColorChanger::instance->ChangeBrush();
 		break;
 
 	case IDM_EXIT:

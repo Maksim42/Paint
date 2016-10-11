@@ -51,6 +51,9 @@
     <ClInclude Include="Line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ColorChanger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -72,6 +75,9 @@
       <Filter>DrawingTools</Filter>
     </ClCompile>
     <ClCompile Include="Line.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorChanger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

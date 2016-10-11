@@ -4,7 +4,8 @@
 Layers::Layers(HWND hWin) {
 	this->hWin = hWin;
 	winDC = GetDC(hWin);
-	brush = CreateSolidBrush(RGB(255, 255, 255));
+	brush = (HBRUSH)GetStockObject(DC_BRUSH);
+	pen = (HPEN)GetStockObject(DC_PEN);
 
 	GetClientRect(hWin, &clientArea);
 	main = GetLayer();
@@ -14,6 +15,8 @@ Layers::Layers(HWND hWin) {
 
 HDC Layers::GetLayer() {
 	HDC layer = CreateCompatibleDC(winDC);
+
+	ChangeObject(layer, pen);
 
 	HBITMAP BitMp = CreateCompatibleBitmap(winDC, clientArea.right, clientArea.bottom);
 	ChangeObject(layer, BitMp);
@@ -27,6 +30,8 @@ HDC Layers::GetLayer() {
 Layers *Layers::instance = NULL;
 
 void Layers::Init(HWND hWin) {
-	instance = new Layers(hWin);
+	if (Layers::instance == NULL) {
+		instance = new Layers(hWin);
+	}
 }
 

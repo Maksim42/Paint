@@ -145,6 +145,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorChanger.h" />
     <ClInclude Include="DrawingTools.h" />
     <ClInclude Include="Layers.h" />
     <ClInclude Include="Line.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="ToolManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ColorChanger.cpp" />
     <ClCompile Include="Layers.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Paint.cpp" />
