@@ -44,7 +44,7 @@ Layer * LayerManager::GetLayer(int layer_id)
 		return layer[layer_id];
 	}
 	else {
-		return layer[NUM_LAYERS - 1];
+		return layer[0];
 	}
 	return nullptr;
 }

@@ -76,12 +76,12 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_PAINT));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_UICON));
+    wcex.hCursor        = LoadCursor(nullptr, IDC_CROSS);
+    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW - 1);
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_PAINT);
     wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_UICON));
 
     return RegisterClassExW(&wcex);
 }
@@ -94,14 +94,18 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //   COMMENTS:
 //
 //        In this function, we save the instance handle in a global variable and
-//        create and display the layer[0]->dc program window.
+//        create and display the main program window.
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+  /* HWND hWnd = CreateWindowW(szWindowClass, szTitle,
+		WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, CW_USEDEFAULT, 0, CW_USEDEFAULT,
+		0, nullptr, nullptr, hInstance, nullptr);*/
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle,
+	   WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, CW_USEDEFAULT, 0, 707,
+	   500, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
