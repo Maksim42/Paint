@@ -10,19 +10,19 @@ void Line::MouseLButtonDown(int x, int y) {
 	_x = x;
 	_y = y;
 
-	MoveToEx(Layers::instance->main, x, y, NULL);
-	MoveToEx(Layers::instance->temporari, x, y, NULL);
+	MoveToEx(LayerManager::instance->GetLayer(0)->dc, x, y, NULL);
+	MoveToEx(LayerManager::instance->GetLayer(1)->dc, x, y, NULL);
 }
 
 void Line::MouseMove(int x, int y) {
 	if (isPaint) {
-		BitBlt(Layers::instance->temporari, 0, 0, Layers::instance->clientArea.right,
-			Layers::instance->clientArea.bottom, Layers::instance->main, 0, 0, SRCCOPY);
+		BitBlt(LayerManager::instance->GetLayer(1)->dc, 0, 0, LayerManager::instance->client_area.right,
+			LayerManager::instance->client_area.bottom, LayerManager::instance->GetLayer(0)->dc, 0, 0, SRCCOPY);
 
-		MoveToEx(Layers::instance->temporari, _x, _y, NULL);
-		LineTo(Layers::instance->temporari, x, y);
+		MoveToEx(LayerManager::instance->GetLayer(1)->dc, _x, _y, NULL);
+		LineTo(LayerManager::instance->GetLayer(1)->dc, x, y);
 
-		InvalidateRect(Layers::instance->hWin, &(Layers::instance->clientArea), false);
+		InvalidateRect(LayerManager::instance->hWin, &(LayerManager::instance->client_area), false);
 		TrackMouseEvent(&trackMouseEvent);
 	}
 }
@@ -31,8 +31,8 @@ void Line::MouseLButtonUp(int x, int y) {
 	if (isPaint) {
 		isPaint = false;
 
-		LineTo(Layers::instance->main, x, y);
+		LineTo(LayerManager::instance->GetLayer(0)->dc, x, y);
 
-		InvalidateRect(Layers::instance->hWin, &(Layers::instance->clientArea), false);
+		InvalidateRect(LayerManager::instance->hWin, &(LayerManager::instance->client_area), false);
 	}
 }

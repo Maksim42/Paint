@@ -4,15 +4,15 @@
 Tool::Tool() {
 	isPaint = false;
 	trackMouseEvent.cbSize = sizeof(trackMouseEvent);
-	trackMouseEvent.dwFlags = TME_LEAVE; //отслеживаем выход курсора
-	trackMouseEvent.hwndTrack = Layers::instance->hWin; //из этого окна
+	trackMouseEvent.dwFlags = TME_LEAVE;
+	trackMouseEvent.hwndTrack = LayerManager::instance->hWin;
 }
 
 void Tool::StopPainting() {
 	isPaint = false;
 
-	BitBlt(Layers::instance->temporari, 0, 0, Layers::instance->clientArea.right,
-		Layers::instance->clientArea.bottom, Layers::instance->main, 0, 0, SRCCOPY);
+	BitBlt(LayerManager::instance->GetLayer(1)->dc, 0, 0, LayerManager::instance->client_area.right,
+		LayerManager::instance->client_area.bottom, LayerManager::instance->GetLayer(0)->dc, 0, 0, SRCCOPY);
 
-	InvalidateRect(Layers::instance->hWin, &(Layers::instance->clientArea), false);
+	InvalidateRect(LayerManager::instance->hWin, &(LayerManager::instance->client_area), false);
 }

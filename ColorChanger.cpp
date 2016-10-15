@@ -22,15 +22,13 @@ void ColorChanger::Init(HWND hWnd) {
 
 void ColorChanger::ChangePen() {
 	if (ChooseColor(&dialog)) {
-		SetDCPenColor(Layers::instance->main, dialog.rgbResult);
-		SetDCPenColor(Layers::instance->temporari, dialog.rgbResult);
+		LayerManager::instance->SetAllPensColor(dialog.rgbResult);
 	}
 }
 
 void ColorChanger::ChangeBrush() {
 	if (ChooseColor(&dialog)) {
-		SetDCBrushColor(Layers::instance->main, dialog.rgbResult);
-		SetDCBrushColor(Layers::instance->temporari, dialog.rgbResult);
+		LayerManager::instance->SetAllBrushColor(dialog.rgbResult);
 	}
 }
 

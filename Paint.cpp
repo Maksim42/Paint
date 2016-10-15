@@ -9,7 +9,7 @@
 // Global Variables:
 HINSTANCE		hInst;								// current instance
 WCHAR			szTitle[MAX_LOADSTRING];            // The title bar text
-WCHAR			szWindowClass[MAX_LOADSTRING];      // the main window class name
+WCHAR			szWindowClass[MAX_LOADSTRING];      // the layer[0]->dc window class name
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -45,7 +45,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // Main message loop:
+    // layer[0]->dc message loop:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
@@ -89,12 +89,12 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 //   FUNCTION: InitInstance(HINSTANCE, int)
 //
-//   PURPOSE: Saves instance handle and creates main window
+//   PURPOSE: Saves instance handle and creates layer[0]->dc window
 //
 //   COMMENTS:
 //
 //        In this function, we save the instance handle in a global variable and
-//        create and display the main program window.
+//        create and display the layer[0]->dc program window.
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
@@ -117,10 +117,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-//  PURPOSE:  Processes messages for the main window.
+//  PURPOSE:  Processes messages for the layer[0]->dc window.
 //
 //  WM_COMMAND  - process the application menu
-//  WM_PAINT    - Paint the main window
+//  WM_PAINT    - Paint the layer[0]->dc window
 //  WM_DESTROY  - post a quit message and return
 //
 //
@@ -171,7 +171,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 void CreateMessageHandler(HWND hWnd) {
-	Layers::Init(hWnd);
+	LayerManager::Init(hWnd);
 	ToolManager::Init();
 	ColorChanger::Init(hWnd);
 }
@@ -220,7 +220,7 @@ void PaintMessageHandler(HWND hWnd) {
 	RECT r;
 	GetClientRect(hWnd, &r);
 
-	BitBlt(hdc, 0, 0, r.right, r.bottom, Layers::instance->temporari, 0, 0, SRCCOPY);
+	BitBlt(hdc, 0, 0, r.right, r.bottom, LayerManager::instance->GetLayer(1)->dc, 0, 0, SRCCOPY);
 
 	EndPaint(hWnd, &ps);
 }

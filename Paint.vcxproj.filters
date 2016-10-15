@@ -33,9 +33,6 @@
     <ClInclude Include="Paint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Layers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ToolManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,11 +45,17 @@
     <ClInclude Include="DrawingTools.h">
       <Filter>DrawingTools</Filter>
     </ClInclude>
-    <ClInclude Include="Line.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ColorChanger.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>DrawingTools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -60,9 +63,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Paint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Layers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ToolManager.cpp">
@@ -74,11 +74,17 @@
     <ClCompile Include="Tool.cpp">
       <Filter>DrawingTools</Filter>
     </ClCompile>
-    <ClCompile Include="Line.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ColorChanger.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LayerManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>DrawingTools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
