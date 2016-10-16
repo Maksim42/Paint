@@ -16,6 +16,7 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    PenProp(HWND, UINT, WPARAM, LPARAM);
 void				CreateMessageHandler(HWND);
 void				PaintMessageHandler(HWND);
 bool				CommandMessageHandler(HWND, WPARAM);
@@ -202,6 +203,10 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		ColorChanger::instance->ChangePen();
 		break;
 
+	case ID_TOOLS_PENWIDTH:
+		DialogBox(hInst, MAKEINTRESOURCE(IDD_PENPROP), hWnd, PenProp);
+		break;
+
 	case ID_TOOLS_BRUSHCOLOR:
 		ColorChanger::instance->ChangeBrush();
 		break;
@@ -247,4 +252,53 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
+}
+
+INT_PTR CALLBACK PenProp(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	UNREFERENCED_PARAMETER(lParam);
+	switch (message)
+	{
+	case WM_INITDIALOG:
+		return (INT_PTR)TRUE;
+
+	case WM_COMMAND:
+		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+		{
+			EndDialog(hDlg, LOWORD(wParam));
+			return (INT_PTR)TRUE;
+		} else {
+			switch (LOWORD(wParam))
+			{
+				case IDWIDTH1:
+					LayerManager::instance->SetAllPensWidth(1);
+					break;
+
+				case IDWIDTH2:
+					LayerManager::instance->SetAllPensWidth(2);
+					break;
+
+				case IDWIDTH3:
+					LayerManager::instance->SetAllPensWidth(3);
+					break;
+
+				case IDWIDTH4:
+					LayerManager::instance->SetAllPensWidth(4);
+					break;
+
+				case IDWIDTH5:
+					LayerManager::instance->SetAllPensWidth(5);
+					break;
+
+				case IDWIDTH6:
+					LayerManager::instance->SetAllPensWidth(6);
+					break;
+
+				default:
+					break;
+			}
+		}
+		break;
+	}
+	return (INT_PTR)FALSE;
 }
