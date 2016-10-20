@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LayerManager.h"
+#include "Lens.h"
 
 class Tool {
 public:

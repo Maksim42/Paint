@@ -19,6 +19,7 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    PenProp(HWND, UINT, WPARAM, LPARAM);
 void				CreateMessageHandler(HWND);
 void				PaintMessageHandler(HWND);
+void				MouseWheelHandler(HWND, WPARAM);
 bool				CommandMessageHandler(HWND, WPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -77,12 +78,12 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_UICON));
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_UICONA));
     wcex.hCursor        = LoadCursor(nullptr, IDC_CROSS);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW - 1);
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_PAINT);
     wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_UICON));
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_UICONA));
 
     return RegisterClassExW(&wcex);
 }
@@ -101,11 +102,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-  /* HWND hWnd = CreateWindowW(szWindowClass, szTitle,
-		WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, CW_USEDEFAULT, 0, CW_USEDEFAULT,
-		0, nullptr, nullptr, hInstance, nullptr);*/
    HWND hWnd = CreateWindowW(szWindowClass, szTitle,
-	   WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, CW_USEDEFAULT, 0, 707,
+	   (WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME) & ~WS_MAXIMIZEBOX, CW_USEDEFAULT, 0, 707,
 	   500, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
@@ -153,6 +151,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		ToolManager::instance->tool->StopPainting();
 		break;
 
+	case WM_MOUSEWHEEL:
+		MouseWheelHandler(hWnd, wParam);
+		break;
+
 	case WM_COMMAND: {
 		bool result = CommandMessageHandler(hWnd, wParam);
 
@@ -177,6 +179,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void CreateMessageHandler(HWND hWnd) {
 	LayerManager::Init(hWnd);
+	Lens::Init();
 	ToolManager::Init();
 	ColorChanger::Init(hWnd);
 }
@@ -222,14 +225,43 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 	return result;
 }
 
+void MouseWheelHandler(HWND hWnd, WPARAM wParam) {
+	short zDelta = GET_WHEEL_DELTA_WPARAM(wParam);
+	int fwKeys = LOWORD(wParam);
+	BOOL press_ctrl = (fwKeys & MK_CONTROL) != 0;
+	BOOL press_shift = (fwKeys & MK_SHIFT) != 0;
+
+	if (zDelta > 0) {
+		if (press_ctrl && !press_shift) {
+			Lens::instance->ZoomIn();
+		}
+		if (press_shift) {
+			Lens::instance->MoveRight();
+		}
+		if (fwKeys == 0) {
+			Lens::instance->MoveTop();
+		}
+	} else {
+		if (press_ctrl && !press_shift) {
+			Lens::instance->ZoomOut();
+		}
+		if (press_shift) {
+			Lens::instance->MoveLeft();
+		}
+		if (fwKeys == 0) {
+			Lens::instance->MoveBotom();
+		}
+	}
+
+	InvalidateRect(hWnd, &(LayerManager::instance->client_area), false);
+	//UpdateWindow(hWnd);
+}
+
 void PaintMessageHandler(HWND hWnd) {
 	PAINTSTRUCT ps;
 	HDC hdc = BeginPaint(hWnd, &ps);
-
-	RECT r;
-	GetClientRect(hWnd, &r);
-
-	BitBlt(hdc, 0, 0, r.right, r.bottom, LayerManager::instance->GetLayer(1)->dc, 0, 0, SRCCOPY);
+	
+	Lens::instance->Scaling(hdc);
 
 	EndPaint(hWnd, &ps);
 }
@@ -254,50 +286,46 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
-INT_PTR CALLBACK PenProp(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-{
+INT_PTR CALLBACK PenProp(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
 	UNREFERENCED_PARAMETER(lParam);
-	switch (message)
-	{
-	case WM_INITDIALOG:
-		return (INT_PTR)TRUE;
-
-	case WM_COMMAND:
-		if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-		{
-			EndDialog(hDlg, LOWORD(wParam));
+	switch (message) {
+		case WM_INITDIALOG:
 			return (INT_PTR)TRUE;
-		} else {
-			switch (LOWORD(wParam))
-			{
-				case IDWIDTH1:
-					LayerManager::instance->SetAllPensWidth(1);
-					break;
 
-				case IDWIDTH2:
-					LayerManager::instance->SetAllPensWidth(2);
-					break;
+		case WM_COMMAND:
+			if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL) {
+				EndDialog(hDlg, LOWORD(wParam));
+				return (INT_PTR)TRUE;
+			} else {
+				switch (LOWORD(wParam)) {
+					case IDWIDTH1:
+						LayerManager::instance->SetAllPensWidth(1);
+						break;
 
-				case IDWIDTH3:
-					LayerManager::instance->SetAllPensWidth(3);
-					break;
+					case IDWIDTH2:
+						LayerManager::instance->SetAllPensWidth(2);
+						break;
 
-				case IDWIDTH4:
-					LayerManager::instance->SetAllPensWidth(4);
-					break;
+					case IDWIDTH3:
+						LayerManager::instance->SetAllPensWidth(3);
+						break;
 
-				case IDWIDTH5:
-					LayerManager::instance->SetAllPensWidth(5);
-					break;
+					case IDWIDTH4:
+						LayerManager::instance->SetAllPensWidth(4);
+						break;
 
-				case IDWIDTH6:
-					LayerManager::instance->SetAllPensWidth(6);
-					break;
+					case IDWIDTH5:
+						LayerManager::instance->SetAllPensWidth(5);
+						break;
 
-				default:
-					break;
+					case IDWIDTH6:
+						LayerManager::instance->SetAllPensWidth(6);
+						break;
+
+					default:
+						break;
+				}
 			}
-		}
 		break;
 	}
 	return (INT_PTR)FALSE;

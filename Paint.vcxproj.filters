@@ -57,6 +57,9 @@
     <ClInclude Include="Line.h">
       <Filter>DrawingTools</Filter>
     </ClInclude>
+    <ClInclude Include="Lens.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -86,6 +89,9 @@
     <ClCompile Include="Line.cpp">
       <Filter>DrawingTools</Filter>
     </ClCompile>
+    <ClCompile Include="Lens.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Paint.rc">
@@ -93,16 +99,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Paint.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="icon1.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="palit_big.ico">
+    <Image Include="palit_big_a.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

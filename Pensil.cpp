@@ -5,15 +5,18 @@ Pensil::Pensil(): Tool() {
 }
 
 void Pensil::MouseLButtonDown(int x, int y) {
+	POINT cordinate = Lens::instance->CalculationRealCordinate(x, y);
 	isPaint = true;
 
-	MoveToEx(LayerManager::instance->GetLayer(0)->dc, x, y, NULL);
-	MoveToEx(LayerManager::instance->GetLayer(1)->dc, x, y, NULL);
+	MoveToEx(LayerManager::instance->GetLayer(0)->dc, cordinate.x, cordinate.y, NULL);
+	MoveToEx(LayerManager::instance->GetLayer(1)->dc, cordinate.x, cordinate.y, NULL);
 }
 
 void Pensil::MouseMove(int x, int y) {
 	if (isPaint) {
-		LineTo(LayerManager::instance->GetLayer(0)->dc, x, y);
+		POINT cordinate = Lens::instance->CalculationRealCordinate(x, y);
+
+		LineTo(LayerManager::instance->GetLayer(0)->dc, cordinate.x, cordinate.y);
 
 		BitBlt(LayerManager::instance->GetLayer(1)->dc, 0, 0, LayerManager::instance->client_area.right,
 			LayerManager::instance->client_area.bottom, LayerManager::instance->GetLayer(0)->dc, 0, 0, SRCCOPY);

@@ -149,6 +149,7 @@
     <ClInclude Include="DrawingTools.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LayerManager.h" />
+    <ClInclude Include="Lens.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Paint.h" />
     <ClInclude Include="Pensil.h" />
@@ -162,6 +163,7 @@
     <ClCompile Include="ColorChanger.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="LayerManager.cpp" />
+    <ClCompile Include="Lens.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="Paint.cpp" />
     <ClCompile Include="Pensil.cpp" />
@@ -178,10 +180,7 @@
     <ResourceCompile Include="Paint.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico" />
-    <Image Include="Paint.ico" />
-    <Image Include="palit_big.ico" />
-    <Image Include="small.ico" />
+    <Image Include="palit_big_a.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
