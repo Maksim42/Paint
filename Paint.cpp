@@ -206,6 +206,21 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		ColorChanger::instance->ChangePen();
 		break;
 
+	case ID_VIEW_ZOOMIN:
+		Lens::instance->ZoomIn();
+		InvalidateRect(hWnd, &(LayerManager::instance->client_area), false);
+		break;
+
+	case ID_VIEW_ZOOMOUT:
+		Lens::instance->ZoomOut();
+		InvalidateRect(hWnd, &(LayerManager::instance->client_area), false);
+		break;
+
+	case ID_VIEW_NORMALSCALE:
+		Lens::instance->NormalScale();
+		InvalidateRect(hWnd, &(LayerManager::instance->client_area), false);
+		break;
+
 	case ID_TOOLS_PENWIDTH:
 		DialogBox(hInst, MAKEINTRESOURCE(IDD_PENPROP), hWnd, PenProp);
 		break;

@@ -15,6 +15,7 @@ public:
 	void MoveLeft();
 	void MoveTop();
 	void MoveBotom();
+	void NormalScale();
 private:
 	double scale;
 	float x_vievw;
@@ -27,7 +28,6 @@ private:
 	float vertical_scale;
 
 	Lens();
-	~Lens();
 	int ÑalculationShift(int, float, float*);
 	void CalculationScaleParam();
 };

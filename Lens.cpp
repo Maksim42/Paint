@@ -12,11 +12,6 @@ Lens::Lens() {
 	CalculationScaleParam();
 }
 
-
-Lens::~Lens()
-{
-}
-
 void Lens::Init() {
 	if (Lens::instance == NULL) {
 		instance = new Lens();
@@ -78,6 +73,14 @@ void Lens::MoveTop() {
 
 void Lens::MoveBotom() {
 	y_vievw += vertical_step;
+}
+
+void Lens::NormalScale() {
+	scale = 1;
+	x_vievw = (int)LayerManager::instance->client_area.right / 2;
+	y_vievw = (int)LayerManager::instance->client_area.bottom / 2;
+
+	CalculationScaleParam();
 }
 
 void Lens::CalculationScaleParam() {
