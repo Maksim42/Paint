@@ -194,6 +194,10 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
 		break;
 
+	case ID_FILE_NEW:
+		LayerManager::instance->Clear();
+		break;
+
 	case ID_TOOLS_PENSIL:
 		ToolManager::instance->SetTool(TID_PENSIL);
 		break;

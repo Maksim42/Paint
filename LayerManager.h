@@ -1,5 +1,6 @@
 #pragma once
 #include "Layer.h"
+#include "Lens.h"
 #define NUM_LAYERS 2
 
 class LayerManager { 
@@ -14,6 +15,7 @@ public:
 	void					SetAllPensColor(COLORREF);
 	void					SetAllBrushColor(COLORREF);
 	void					SetAllPensWidth(int);
+	void					Clear();
 private:
 	Layer				   *layer[NUM_LAYERS];
 

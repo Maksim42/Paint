@@ -32,6 +32,15 @@ void LayerManager::SetAllPensWidth(int width) {
 	}
 }
 
+void LayerManager::Clear() {
+	for (int i = 0; i < NUM_LAYERS; i++) {
+		layer[i]->SetBrushColor(RGB(255, 255, 255));
+		PatBlt(layer[i]->dc, 0, 0, client_area.right, client_area.bottom, PATCOPY);
+	}
+	Lens::instance->NormalScale();
+	InvalidateRect(LayerManager::instance->hWin, &(LayerManager::instance->client_area), false);
+}
+
 void LayerManager::Init(HWND hWin) {
 	if (LayerManager::instance == NULL) {
 		instance = new LayerManager(hWin);
