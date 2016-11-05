@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="ColorChanger.h" />
     <ClInclude Include="DrawingTools.h" />
+    <ClInclude Include="FileDialog.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LayerManager.h" />
     <ClInclude Include="Lens.h" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColorChanger.cpp" />
+    <ClCompile Include="FileDialog.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="LayerManager.cpp" />
     <ClCompile Include="Lens.cpp" />

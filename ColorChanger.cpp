@@ -20,13 +20,13 @@ void ColorChanger::Init(HWND hWnd) {
 	}
 }
 
-void ColorChanger::ChangePen() {
+void ColorChanger::ShowPenColorDialog() {
 	if (ChooseColor(&dialog)) {
 		LayerManager::instance->SetAllPensColor(dialog.rgbResult);
 	}
 }
 
-void ColorChanger::ChangeBrush() {
+void ColorChanger::ShowBrushColorDialog() {
 	if (ChooseColor(&dialog)) {
 		LayerManager::instance->SetAllBrushColor(dialog.rgbResult);
 	}

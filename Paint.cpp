@@ -182,6 +182,7 @@ void CreateMessageHandler(HWND hWnd) {
 	Lens::Init();
 	ToolManager::Init();
 	ColorChanger::Init(hWnd);
+	FileDialog::Init(hWnd);
 }
 
 bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
@@ -200,12 +201,15 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		break;
 
 	case ID_FILE_SAVE:
-		LayerManager::instance->GetMetafile()->Save(L"Paint.emf");
+		if (FileDialog::instance->ShowSaveFileDialog())
+			LayerManager::instance->GetMetafile()->Save(FileDialog::instance->file_name);
 		break;
 
 	case ID_FILE_OPEN:
-		LayerManager::instance->DrawingImage(L"Paint.emf");
-		InvalidateRect(hWnd, &(LayerManager::instance->client_area), false);
+		if (FileDialog::instance->ShowOpenFileDialog()) {
+			LayerManager::instance->DrawingImage(FileDialog::instance->file_name);
+			InvalidateRect(hWnd, &(LayerManager::instance->client_area), false);
+		}
 		break;
 
 	case ID_TOOLS_PENSIL:
@@ -217,7 +221,7 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		break;
 
 	case ID_TOOLS_PENCOLOR:
-		ColorChanger::instance->ChangePen();
+		ColorChanger::instance->ShowPenColorDialog();
 		break;
 
 	case ID_VIEW_ZOOMIN:
@@ -240,7 +244,7 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		break;
 
 	case ID_TOOLS_BRUSHCOLOR:
-		ColorChanger::instance->ChangeBrush();
+		ColorChanger::instance->ShowBrushColorDialog();
 		break;
 
 	case IDM_EXIT:

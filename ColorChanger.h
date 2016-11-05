@@ -9,8 +9,8 @@ public:
 	static ColorChanger  *instance;
 	
 	static void Init(HWND);
-	void ChangePen();
-	void ChangeBrush();
+	void ShowPenColorDialog();
+	void ShowBrushColorDialog();
 private:
 	ColorChanger(HWND);
 

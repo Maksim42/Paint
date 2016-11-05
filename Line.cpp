@@ -13,6 +13,7 @@ void Line::MouseLButtonDown(int x, int y) {
 
 	MoveToEx(LayerManager::instance->GetLayer(0)->dc, real_cordinate.x, real_cordinate.y, NULL);
 	MoveToEx(LayerManager::instance->GetLayer(1)->dc, real_cordinate.x, real_cordinate.y, NULL);
+	MoveToEx(LayerManager::instance->GetMetafile()->dc, real_cordinate.x, real_cordinate.y, NULL);
 }
 
 void Line::MouseMove(int x, int y) {
@@ -36,6 +37,7 @@ void Line::MouseLButtonUp(int x, int y) {
 		POINT real_cordinate = Lens::instance->CalculationRealCordinate(x, y);
 
 		LineTo(LayerManager::instance->GetLayer(0)->dc, real_cordinate.x, real_cordinate.y);
+		LineTo(LayerManager::instance->GetMetafile()->dc, real_cordinate.x, real_cordinate.y);
 
 		InvalidateRect(LayerManager::instance->hWin, &(LayerManager::instance->client_area), false);
 	}

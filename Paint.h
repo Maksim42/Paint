@@ -5,3 +5,5 @@
 #include "Lens.h"
 #include "ToolManager.h"
 #include "ColorChanger.h"
+#include "FileDialog.h"
+
