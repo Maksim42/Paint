@@ -196,6 +196,16 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 
 	case ID_FILE_NEW:
 		LayerManager::instance->Clear();
+		InvalidateRect(LayerManager::instance->hWin, &(LayerManager::instance->client_area), false);
+		break;
+
+	case ID_FILE_SAVE:
+		LayerManager::instance->GetMetafile()->Save(L"Paint.emf");
+		break;
+
+	case ID_FILE_OPEN:
+		LayerManager::instance->DrawingImage(L"Paint.emf");
+		InvalidateRect(hWnd, &(LayerManager::instance->client_area), false);
 		break;
 
 	case ID_TOOLS_PENSIL:

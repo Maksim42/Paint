@@ -5,16 +5,23 @@ Layer::Layer(HDC mainDc, RECT clientRect) {
 	dc = CreateCompatibleDC(mainDc);
 
 	HBITMAP BitMp = CreateCompatibleBitmap(mainDc, clientRect.right, clientRect.bottom);
-	DeleteObject(SelectObject(dc, BitMp));
+	def_bitmap = (HBITMAP) SelectObject(dc, BitMp);
 
-	SetPen(PS_SOLID, 1, RGB(10, 20, 30));
+	def_pen = SetPen(PS_SOLID, 1, RGB(10, 20, 30));
 	
-	SetBrushColor(RGB(255, 255, 255));
+	brushColor = RGB(255, 255, 255);
+	HBRUSH newBrush = CreateSolidBrush(brushColor);
+	def_brush = (HBRUSH) SelectObject(dc, newBrush);
 	PatBlt(dc, 0, 0, clientRect.right, clientRect.bottom, PATCOPY);
 }
 
-Layer::~Layer()
-{
+Layer::Layer() {
+}
+
+Layer::~Layer() {
+	DeleteObject(SelectObject(dc, def_bitmap));
+	DeleteObject(SelectObject(dc, def_pen));
+	DeleteObject(SelectObject(dc, def_brush));
 }
 
 HPEN Layer::SetPen(int style, int width, COLORREF color) {

@@ -1,4 +1,5 @@
 #pragma once
+
 class Layer {
 public:
 	HDC dc;
@@ -9,10 +10,15 @@ public:
 	int SetPenWidht(int);
 	HPEN SetPen(int, int, COLORREF);
 	COLORREF SetBrushColor(COLORREF);
-private:
+protected:
 	int penStyle;
 	int penWidth;
 	COLORREF penColor;
 	COLORREF brushColor;
+	HPEN def_pen;
+	HBITMAP def_bitmap;
+	HBRUSH def_brush;
+
+	Layer();
 };
 

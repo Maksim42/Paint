@@ -1,5 +1,4 @@
 #include "stdafx.h"
-
 #include "Lens.h"
 
 Lens *Lens::instance = NULL;
