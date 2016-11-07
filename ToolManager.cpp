@@ -6,6 +6,7 @@ ToolManager *ToolManager::instance = NULL;
 ToolManager::ToolManager() {
 	tools[TID_PENSIL] = new Pensil();
 	tools[TID_LINE] = new Line();
+	tools[TID_PRINT] = new PrinterTool();
 
 	SetTool(TID_PENSIL);
 }

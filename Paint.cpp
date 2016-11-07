@@ -183,6 +183,7 @@ void CreateMessageHandler(HWND hWnd) {
 	ToolManager::Init();
 	ColorChanger::Init(hWnd);
 	FileDialog::Init(hWnd);
+	Printer::Init(hWnd);
 }
 
 bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
@@ -210,6 +211,15 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 			LayerManager::instance->DrawingImage(FileDialog::instance->file_name);
 			InvalidateRect(hWnd, &(LayerManager::instance->client_area), false);
 		}
+		break;
+
+	case ID_PRINT_PRINTFULLPAGE:
+		Printer::instance->Print(0, 0, LayerManager::instance->client_area.right,
+			LayerManager::instance->client_area.bottom);
+		break;
+
+	case ID_PRINT_PRINTPART:
+		ToolManager::instance->SetTool(TID_PRINT);
 		break;
 
 	case ID_TOOLS_PENSIL:

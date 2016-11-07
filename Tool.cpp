@@ -9,10 +9,12 @@ Tool::Tool() {
 }
 
 void Tool::StopPainting() {
-	isPaint = false;
+	if (isPaint) {
+		isPaint = false;
 
-	BitBlt(LayerManager::instance->GetLayer(1)->dc, 0, 0, LayerManager::instance->client_area.right,
-		LayerManager::instance->client_area.bottom, LayerManager::instance->GetLayer(0)->dc, 0, 0, SRCCOPY);
+		BitBlt(LayerManager::instance->GetLayer(1)->dc, 0, 0, LayerManager::instance->client_area.right,
+			LayerManager::instance->client_area.bottom, LayerManager::instance->GetLayer(0)->dc, 0, 0, SRCCOPY);
 
-	InvalidateRect(LayerManager::instance->hWin, &(LayerManager::instance->client_area), false);
+		InvalidateRect(LayerManager::instance->hWin, &(LayerManager::instance->client_area), false);
+	}
 }

@@ -35,6 +35,23 @@ HPEN Layer::SetPen(int style, int width, COLORREF color) {
 	return oldPen;
 }
 
+PenProp Layer::SetPen(PenProp pp) {
+	PenProp old_pp;
+	old_pp.style = penStyle;
+	old_pp.width = penWidth;
+	old_pp.color = penColor;
+
+	penStyle = pp.style;
+	penWidth = pp.width;
+	penColor = pp.color;
+
+	HPEN newPen = CreatePen(penStyle, penWidth, penColor);
+	HGDIOBJ oldPen = SelectObject(dc, newPen);
+	DeleteObject(oldPen);
+
+	return old_pp;
+}
+
 COLORREF Layer::SetPenColor(COLORREF newColor) {
 	COLORREF oldColor = penColor;
 	penColor = newColor;
@@ -63,4 +80,13 @@ COLORREF Layer::SetBrushColor(COLORREF newColor) {
 	DeleteObject(SelectObject(dc, newBrush));
 
 	return oldColor;
+}
+
+void Layer::BrushOff() {
+	HBRUSH new_brush = (HBRUSH) GetStockObject(NULL_BRUSH);
+	DeleteObject(SelectObject(dc, new_brush));
+}
+
+void Layer::BrushOn() {
+	SelectObject(dc, CreateSolidBrush(brushColor));
 }

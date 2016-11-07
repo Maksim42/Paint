@@ -6,4 +6,4 @@
 #include "ToolManager.h"
 #include "ColorChanger.h"
 #include "FileDialog.h"
-
+#include "Printer.h"
