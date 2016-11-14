@@ -60,7 +60,7 @@ void Printer::Print(int x, int y, int x1, int y1) {
 
 		StretchBlt(dialog.hDC, 0, 0, (int)(scale * rect.right * ((float)(rx / rx1))),
 			(int)(scale * rect.bottom * ((float)(ry / ry1))),
-			LayerManager::instance->GetLayer(0)->dc, x, y, x1, y1, SRCCOPY);
+			LayerManager::instance->GetLayer(0)->dc, x, y, x1 - x, y1 - y, SRCCOPY);
 		
 		EndPage(dialog.hDC);
 		EndDoc(dialog.hDC);
