@@ -8,6 +8,9 @@ Tool::Tool() {
 	trackMouseEvent.hwndTrack = LayerManager::instance->hWin;
 }
 
+void Tool::MouseRButtonUp(int, int) {
+}
+
 void Tool::StopPainting() {
 	if (isPaint) {
 		isPaint = false;

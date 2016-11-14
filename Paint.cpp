@@ -147,6 +147,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		ToolManager::instance->tool->MouseLButtonUp(LOWORD(lParam), HIWORD(lParam));
 		break;
 
+	case WM_RBUTTONUP:
+		ToolManager::instance->tool->MouseRButtonUp(LOWORD(lParam), HIWORD(lParam));
+		break;
+
 	case WM_MOUSELEAVE:
 		ToolManager::instance->tool->StopPainting();
 		break;
@@ -228,6 +232,14 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 
 	case ID_TOOLS_LINE:
 		ToolManager::instance->SetTool(TID_LINE);
+		break;
+
+	case ID_TOOLS_RECTANGLE:
+		ToolManager::instance->SetTool(TID_RECT);
+		break;
+
+	case ID_TOOLS_ELLIPSE:
+		ToolManager::instance->SetTool(TID_ELLIPSE);
 		break;
 
 	case ID_TOOLS_PENCOLOR:

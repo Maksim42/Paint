@@ -70,6 +70,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PrinterTool.h">
+      <Filter>DrawingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>DrawingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="EllipseTool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,6 +120,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PrinterTool.cpp">
+      <Filter>DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="EllipseTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

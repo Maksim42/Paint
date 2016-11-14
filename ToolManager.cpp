@@ -7,6 +7,8 @@ ToolManager::ToolManager() {
 	tools[TID_PENSIL] = new Pensil();
 	tools[TID_LINE] = new Line();
 	tools[TID_PRINT] = new PrinterTool();
+	tools[TID_RECT] = new RectangleTool();
+	tools[TID_ELLIPSE] = new EllipseTool();
 
 	SetTool(TID_PENSIL);
 }

@@ -9,6 +9,7 @@ public:
 	virtual void MouseLButtonDown(int, int) = 0;
 	virtual void MouseMove(int, int) = 0;
 	virtual void MouseLButtonUp(int, int) = 0;
+	virtual void MouseRButtonUp(int, int);
 	virtual void StopPainting();
 protected:
 	bool isPaint;
