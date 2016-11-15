@@ -156,6 +156,8 @@
     <ClInclude Include="MetafileLayer.h" />
     <ClInclude Include="Paint.h" />
     <ClInclude Include="Pensil.h" />
+    <ClInclude Include="Polygon.h" />
+    <ClInclude Include="Polylines.h" />
     <ClInclude Include="Printer.h" />
     <ClInclude Include="PrinterTool.h" />
     <ClInclude Include="Rectangle.h" />
@@ -176,6 +178,8 @@
     <ClCompile Include="MetafileLayer.cpp" />
     <ClCompile Include="Paint.cpp" />
     <ClCompile Include="Pensil.cpp" />
+    <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="Polylines.cpp" />
     <ClCompile Include="Printer.cpp" />
     <ClCompile Include="PrinterTool.cpp" />
     <ClCompile Include="Rectangle.cpp" />

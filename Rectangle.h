@@ -1,5 +1,6 @@
 #pragma once
 #include "Tool.h"
+
 class RectangleTool :
 	public Tool
 {

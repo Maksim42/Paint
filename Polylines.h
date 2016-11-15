@@ -1,13 +1,14 @@
 #pragma once
 #include "Tool.h"
 
-class EllipseTool :
+class Polylines :
 	public Tool
 {
 public:
-	EllipseTool();
+	Polylines();
 	void MouseLButtonDown(int, int);
 	void MouseMove(int, int);
 	void MouseLButtonUp(int, int);
+	void MouseRButtonUp(int, int);
 };
 

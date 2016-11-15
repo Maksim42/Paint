@@ -9,6 +9,8 @@ ToolManager::ToolManager() {
 	tools[TID_PRINT] = new PrinterTool();
 	tools[TID_RECT] = new RectangleTool();
 	tools[TID_ELLIPSE] = new EllipseTool();
+	tools[TID_POLYLINE] = new Polylines();
+	tools[TID_POLYGON] = new PolygonTool();
 
 	SetTool(TID_PENSIL);
 }

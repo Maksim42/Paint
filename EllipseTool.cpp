@@ -2,10 +2,8 @@
 #include "EllipseTool.h"
 
 
-EllipseTool::EllipseTool()
-{
+EllipseTool::EllipseTool(){
 }
-
 
 void EllipseTool::MouseLButtonDown(int x, int y) {
 	POINT cordinate = Lens::instance->CalculationRealCordinate(x, y);

@@ -76,6 +76,12 @@
       <Filter>DrawingTools</Filter>
     </ClInclude>
     <ClInclude Include="EllipseTool.h">
+      <Filter>DrawingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Polylines.h">
+      <Filter>DrawingTools</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -126,6 +132,12 @@
       <Filter>DrawingTools</Filter>
     </ClCompile>
     <ClCompile Include="EllipseTool.cpp">
+      <Filter>DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Polylines.cpp">
+      <Filter>DrawingTools</Filter>
+    </ClCompile>
+    <ClCompile Include="Polygon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

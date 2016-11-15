@@ -242,6 +242,14 @@ bool CommandMessageHandler(HWND hWnd, WPARAM wParam) {
 		ToolManager::instance->SetTool(TID_ELLIPSE);
 		break;
 
+	case ID_TOOLS_POLYLINES:
+		ToolManager::instance->SetTool(TID_POLYLINE);
+		break;
+
+	case ID_TOOLS_POLYGON:
+		ToolManager::instance->SetTool(TID_POLYGON);
+		break;
+
 	case ID_TOOLS_PENCOLOR:
 		ColorChanger::instance->ShowPenColorDialog();
 		break;
